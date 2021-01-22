@@ -22,7 +22,7 @@ Player needs to move forwards pressing a chosen key repeatedly to follow its pat
 2. **style.css\*\***
 3. **main.js\*\***
 4. **game.js\*\***
-5. **\*chocobo.js\*\***
+5. **chocobo.js\*\***
 
 #### **1. index.html file**
 
@@ -88,9 +88,9 @@ Definition of the different states and their transition (transition functions)
 
 - Sets number of players
 
-- Sets number of races
+- Sets number of circuits
 
-- Goes to gameScreen when start button is clickeD
+- Goes to gameScreen when start button is clicked
 
 ###### 4. gameScreen
 
@@ -98,9 +98,9 @@ Definition of the different states and their transition (transition functions)
 
 - race finishes when 1st player reaches the finish line
 
-- displays "next race" and updates page with new paths if there are more stages to be played.
+- displays "next circuit" and updates page with new paths if there are more stages to be played.
 
-- goes to youWin/youLose if it's the last race
+- goes to youWin/youLose if it's the last circuit
 
 ###### 3. youLose
 
@@ -119,7 +119,7 @@ Definition of the different states and their transition (transition functions)
 - Create and connect files: main.js, player.js, obstacle.js,
 - BuildDom in main.js
 - Create 4 screens in main.js
-- Create number of players / number of races options in main.js
+- Create number of players / number of circuits options in main.js
 - Create popup to chose key in main.js
 - Create screen transitions in main.js
 - Create Game constructor
