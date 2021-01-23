@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* SPLASH SCREEN */
+body {
+  background-image: url("/img/splash-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Press Start 2P", cursive;
+  font-weight: bold;
+  line-height: 25px;
+}
+#instructions-container {
+  border-radius: 50px;
+  width: 40%;
+  height: auto;
+  text-align: center;
+  float: right;
+  margin: 4rem;
+  padding: 50px 30px;
+  background-color: rgba(247, 247, 233, 0.3);
+}
+#logo {
+  width: 65%;
+  height: auto;
+}
+#dropdown-container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: 15px;
+}
+select {
+  font-family: "Press Start 2P", cursive;
+  font-size: 11px;
+  width: 250px;
+  height: 30px;
+  margin: 10px;
+  padding-left: 10px;
+  background-color: rgb(245, 245, 223);
+  color: brown;
+  border: 1px solid #ebf55c;
+  border-radius: 20px;
+}
+#buttons-container {
+  display: flex;
+}
+
+#start-button {
+  font-family: "Press Start 2P", cursive;
+  margin: 20px 100px;
+  height: 60px;
+  padding: 0 10px;
+  background-color: #eef588;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 25px;
+  margin-right: 10px;
+  border-radius: 20px;
+  border: 2px solid rgb(224, 122, 38);
+}
+
+#start-button:hover {
+  color: rgb(224, 122, 38);
+  background-color: #eef588;
+  box-shadow: 5px 5px #5a5a3b;
+}
+
+/* GAME SCREEN */
+#canvas-container {
+  text-align: center;
+}
+#canvas {
+  background-image: url("/img/background/bk1.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 90vh;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}

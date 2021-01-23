@@ -13,57 +13,67 @@ function buildDom(htmlString) {
   const result = tempDiv.children[0];
   return result;
 }
-// example using function buildDom(htmlString)
-// // const element = buildDom(`
-// <section>
-//     <p></p>
-//     <a></a>
-// </section>
-// `);
-console.log("helloooooo");
 
 //splash screen
 function createSplashScreen() {
   splashScreen = buildDom(`
-  <main>
+  <main id="splash-body">
   <img src="" />
   <div id="instructions-container">
-    <h1> Chocobo racing </h1>
-    <p> instructions</p>
-</div >
+    <img src="/img/logo.png" id="logo"/>
+    <p> Press a given key as fast as possible </br>
+    to be the first one to reach the finish line. </br>
+    Keep your chocobo safe and avoid </br> colliding 
+    with other players</p>
     <div id="buttons-container">
       <div id="dropdown-container">
        <select id="dropdown-players">
-       <option value="" disabled selected hidden>Number of players</option>
-       <option>2 players</option>
-         <option>3 players</option>
-         <option>4 players</option>
+       <option value="select" disabled selected hidden>Number of players</option>
+       <option value="2">2 players</option>
+         <option value="3">3 players</option>
+         <option value="4">4 players</option>
        </select>
        <select id="dropdown-circuits" placeholder="number of circuits">
-       <option value="" disabled selected hidden>Number of circuits</option>
-       <option>1</option>
-         <option>2</option>
-         <option>3</option>
+         <option value="select" disabled selected hidden>Number of circuits</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
        </select>
-       <button id="start-button">Start game</button>
        </div>
+       <button id="start-button">Start game</button>
+    </div>
     </div>
     </main>
     
   `);
+
   document.body.appendChild(splashScreen);
 
-  // TO CONTINUE
-  let playersButton = splashScreen.querySelector("#dropdown-players");
-  let circuitsButton = splashScreen.querySelector("#dropdown-circuits");
+  let numberOfPlayers = splashScreen.querySelector("#dropdown-players");
+  let numberOfCircuits = splashScreen.querySelector("#dropdown-circuits");
+  const startButton = splashScreen.querySelector("#start-button");
 
-  const startButton = splashScreen.querySelector("button");
+  //DELETE WHEN GAME SCREEN DONE
   startButton.addEventListener("click", function () {
     removeSplashScreen();
     createGameScreen();
   });
-}
 
+  //UNCOMMENT WHEN GAME SCREEN DONE
+  //makes number of players/circuits mandatory before launching game screen
+
+  // startButton.addEventListener("click", function () {
+  //   if (
+  //     numberOfPlayers.selectedIndex === 0 ||
+  //     numberOfCircuits.selectedIndex === 0
+  //   ) {
+  //     alert("Please select number of players and circuits");
+  //   } else {
+  //     removeSplashScreen();
+  //     createGameScreen();
+  //   }
+  // });
+}
 createSplashScreen();
 
 function removeSplashScreen() {
@@ -85,11 +95,12 @@ function createGameScreen() {
   </div>
 </header>
   <div class="canvas-container">
-    <canvas></canvas>
+    <canvas id="canvas"></canvas>
   </div>
 </main>
 `);
   document.body.appendChild(gameScreen);
+
   return gameScreen;
 }
 function removeGameScreen() {
