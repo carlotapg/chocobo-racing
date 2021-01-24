@@ -67,10 +67,15 @@ select {
 }
 
 /* GAME SCREEN */
-#canvas-container {
-  text-align: center;
+
+.game-container {
+  height: 800px;
 }
-#canvas {
+#canvas-container {
+  height: 800px;
+}
+
+.game-container {
   background-image: url("/img/background/bk1.jpeg");
   background-size: cover;
   background-repeat: no-repeat;

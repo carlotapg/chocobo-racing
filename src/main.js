@@ -10,6 +10,7 @@ let youWinScreen; // Winner screen
 function buildDom(htmlString) {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = htmlString;
+
   const result = tempDiv.children[0];
   return result;
 }
@@ -54,25 +55,21 @@ function createSplashScreen() {
   const startButton = splashScreen.querySelector("#start-button");
 
   //DELETE WHEN GAME SCREEN DONE
-  startButton.addEventListener("click", function () {
-    removeSplashScreen();
-    createGameScreen();
-  });
+  // startButton.addEventListener("click", startGame);
 
-  //UNCOMMENT WHEN GAME SCREEN DONE
+  // UNCOMMENT WHEN GAME SCREEN DONE
   //makes number of players/circuits mandatory before launching game screen
 
-  // startButton.addEventListener("click", function () {
-  //   if (
-  //     numberOfPlayers.selectedIndex === 0 ||
-  //     numberOfCircuits.selectedIndex === 0
-  //   ) {
-  //     alert("Please select number of players and circuits");
-  //   } else {
-  //     removeSplashScreen();
-  //     createGameScreen();
-  //   }
-  // });
+  startButton.addEventListener("click", function () {
+    if (
+      numberOfPlayers.selectedIndex === 0 ||
+      numberOfCircuits.selectedIndex === 0
+    ) {
+      alert("Please select number of players and circuits");
+    } else {
+      startGame();
+    }
+  });
 }
 createSplashScreen();
 
@@ -95,12 +92,11 @@ function createGameScreen() {
   </div>
 </header>
   <div class="canvas-container">
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" width="679" height="690"></canvas>
   </div>
 </main>
 `);
   document.body.appendChild(gameScreen);
-
   return gameScreen;
 }
 function removeGameScreen() {
@@ -157,6 +153,7 @@ function startGame() {
   }
   removeSplashScreen();
   createGameScreen();
+
   game = new Game();
   game.gameScreen = gameScreen;
 
