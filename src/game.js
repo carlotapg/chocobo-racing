@@ -36,6 +36,8 @@ class Game {
       this.ctx,
       this.canvas.width / 2,
       0,
+      undefined,
+      undefined,
       50,
       "/img/players/yellow1.png",
       "space bar",
@@ -47,6 +49,8 @@ class Game {
       this.ctx,
       this.canvas.width / 2 - 250,
       0,
+      undefined,
+      undefined,
       50,
       "/img/players/black1.png",
       "a",
@@ -59,6 +63,8 @@ class Game {
       this.ctx,
       this.canvas.width / 2 - 250,
       0,
+      undefined,
+      undefined,
       50,
       "/img/players/red1.png",
       "p",
@@ -99,31 +105,46 @@ class Game {
     //add event listeners
 
     //key down
-    this.playersArr.forEach((element) => {
-
-        document.addEventListener('keydown', function(element.key){
-            y++
-        });
-
+    //NOT WORKING
+    window.addEventListener("keydown", (event) => {
+      if (event.key == " ") {
+        this.player1.setDirection("down");
+        this.player1.y += 50;
+        this.player1.updatePosition();
+      } else if (event.key == "a") {
+        this.player2.setDirection("down");
+        this.player2.y += 50;
+        this.player2.updatePosition();
+      } else if (event.key == "p") {
+        this.player2.setDirection("down");
+        this.player2.y += 50;
+        this.player3.updatePosition();
+      } else if (event.key == "m") {
+        this.player4.setDirection("down");
+        this.player4.y += 50;
+        this.player4.updatePosition();
+      }
+      // do something
     });
 
-    // Add event listener for moving the player
-    window.addEventListener("keydown", this.handleKeyDown);
+    // set path
+    this.playersArr.forEach((element) => element.setRandomPath());
     //start the loop w/ requestAnimationFrame
     this.startLoop();
   }
 
   startLoop() {
     const loop = function () {
-      // 1. UPDATE PLAYER
-      // Check Collisions
+      // 1. UPDATE PLAYER STATS
+      // 1.1 Check Collisions
 
-      //update the players
-
+      // 1.2 update the players
+      //   this.playersArr.forEach((element) => element.updatePosition());
       //2. CLEAR CANVAS
 
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       //3. DRAW - UPDATE CANVAS
+
       // Draws selected number of players
       this.playersArr.forEach((element) => element.drawSprite());
 
@@ -134,9 +155,22 @@ class Game {
     }.bind(this); //can use arrow function instead
     //initial call = starts recursion
     loop();
+    console.log(this.player1.x, this.player1.y);
   }
-  checkCollisions() {}
+
+  /// TO CONSULT ABOUT PLAYERSARR, THIS PROBABLI WONT WORK
+  checkCollisions() {
+    this.playersArr.forEach(function (player) {
+      if (player.didCollide() === true) {
+        // to put some sound / animation / stun seconds
+        player.y = 0;
+        player.setRandomPath();
+      }
+    });
+  }
   updateGameStats() {}
+
   youLose() {}
+
   youWin() {}
 }

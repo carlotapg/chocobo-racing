@@ -1,14 +1,16 @@
 "use strict";
 
 class Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, speed) {
+  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, speed) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
-    this.x = this.canvas.width / 2; // depends on number of players
-    this.y = 0; // depends on number of players
+    this.x = this.canvas.width / 2;
+    this.y = 0;
+    this.newX = undefined;
+    this.newY = undefined;
     this.size = 50;
     this.imgSrc = "/img/players/yellow1.png";
-    this.key = "space bar";
+    this.key = " ";
     this.path = undefined; // randomized with Math.floor
     this.speed = undefined; // depends on clicks
   }
@@ -78,20 +80,66 @@ class Player {
   }
 
   setRandomPath() {
-    // to figure out
-    // this.ctx.moveTo(this.x, this.y);
-    // this.ctx.lineTo(Math.random() * width, Math.random() * height);
-    // this.ctx.stroke();
+    // NOT WORKING
+    this.ctx.beginPath(); // Start a new path
+    this.ctx.moveTo(this.x, this.y); // Move the pen to (30, 50)
+    this.ctx.lineTo(
+      Math.random() * this.canvas.width,
+      Math.random() * this.canvas.height
+    );
+    this.ctx.lineTo(this.newX, 800); // Move the pen to end line in straight line
+    this.ctx.strokeStyle = "#FF0000";
+    this.ctx.stroke(); // Render the path
   }
 
-  handleScreenCollision() {}
-  didCollide(enemyChocobo) {}
-  stunPlayer() {}
+  setDirection(direction) {
+    if (direction === "down") this.newY += 50;
+  }
+
+  updatePosition() {
+    this.y = this.newY + this.direction; // update player's position
+  }
+
+  // to be handled with path instead of player
+  handleScreenCollision(path) {}
+
+  didCollide(otherPlayer) {
+    // STILL TO CHECK
+    const playerLeft = this.x / 2;
+    const playerRight = (this.x + this.size) / 2;
+    const playerTop = this.y / 2;
+    const playerBottom = (this.y + this.size) / 2;
+
+    const otherPlayerLeft = otherPlayer.x / 2;
+    const otherPlayerRight = (otherPlayer.x + otherPlayer.size) / 2;
+    const otherPlayerTop = otherPlayer.y / 2;
+    const otherPlayerBottom = (otherPlayer.y + otherPlayer.size) / 2;
+
+    const crossLeft =
+      otherPlayerLeft <= playerRight && otherPlayerLeft >= playerLeft;
+    const crossRight =
+      otherPlayerRight >= playerLeft && otherPlayerRight <= playerRight;
+
+    const crossTop =
+      otherPlayerTop <= playerBottom && otherPlayerTop >= playerTop;
+    const crossBottom =
+      otherPlayerBottom >= playerTop && otherPlayerBottom <= playerBottom;
+
+    if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  stunPlayer() {
+    this.newY = 0;
+  }
 }
 
 class BlackPlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, speed) {
-    super(canvas, ctx, size, speed);
+  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, speed) {
+    super(canvas, ctx, newX, newY, size, speed);
     this.x = this.canvas.width / 2 - 125;
     this.y = 0;
     this.imgSrc = "/img/players/black1.png";
@@ -100,8 +148,8 @@ class BlackPlayer extends Player {
   }
 }
 class RedPlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, speed) {
-    super(canvas, ctx, size, speed);
+  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, speed) {
+    super(canvas, ctx, newX, newY, size, speed);
     this.x = this.canvas.width / 2 - 250;
     this.y = 0;
     this.imgSrc = "/img/players/red1.png";
@@ -111,8 +159,8 @@ class RedPlayer extends Player {
 }
 
 class BluePlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, speed) {
-    super(canvas, ctx, size, speed);
+  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, speed) {
+    super(canvas, ctx, newX, newY, size, speed);
     this.x = this.canvas.width / 2 + 125;
     this.y = 0;
     this.imgSrc = "/img/players/blue1.png";
