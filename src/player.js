@@ -1,18 +1,18 @@
 "use strict";
 
 class Player {
-  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, speed) {
+  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, boolean) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     this.x = this.canvas.width / 2;
     this.y = 0;
     this.newX = undefined;
     this.newY = undefined;
-    this.size = 50;
+    this.size = 200;
     this.imgSrc = "/img/players/yellow1.png";
     this.key = " ";
     this.path = undefined; // randomized with Math.floor
-    this.speed = undefined; // depends on clicks
+    this.boolean = false; // depends on clicks
   }
 
   drawSprite() {
@@ -88,16 +88,14 @@ class Player {
       Math.random() * this.canvas.height
     );
     this.ctx.lineTo(this.newX, 800); // Move the pen to end line in straight line
-    this.ctx.strokeStyle = "#FF0000";
+    this.ctx.lineWidth = 5;
+    this.ctx.strokeStyle = "white";
     this.ctx.stroke(); // Render the path
   }
 
-  setDirection(direction) {
-    if (direction === "down") this.newY += 50;
-  }
-
   updatePosition() {
-    this.y = this.newY + this.direction; // update player's position
+    this.y += 50; // update player's position
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   // to be handled with path instead of player
@@ -138,8 +136,8 @@ class Player {
 }
 
 class BlackPlayer extends Player {
-  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, speed) {
-    super(canvas, ctx, newX, newY, size, speed);
+  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, boolean) {
+    super(canvas, ctx, newX, newY, size, boolean);
     this.x = this.canvas.width / 2 - 125;
     this.y = 0;
     this.imgSrc = "/img/players/black1.png";
@@ -148,8 +146,8 @@ class BlackPlayer extends Player {
   }
 }
 class RedPlayer extends Player {
-  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, speed) {
-    super(canvas, ctx, newX, newY, size, speed);
+  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, boolean) {
+    super(canvas, ctx, newX, newY, size, boolean);
     this.x = this.canvas.width / 2 - 250;
     this.y = 0;
     this.imgSrc = "/img/players/red1.png";
@@ -159,8 +157,8 @@ class RedPlayer extends Player {
 }
 
 class BluePlayer extends Player {
-  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, speed) {
-    super(canvas, ctx, newX, newY, size, speed);
+  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, boolean) {
+    super(canvas, ctx, newX, newY, size, boolean);
     this.x = this.canvas.width / 2 + 125;
     this.y = 0;
     this.imgSrc = "/img/players/blue1.png";

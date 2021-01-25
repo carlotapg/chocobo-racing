@@ -3,13 +3,12 @@ class Game {
     this.canvas = undefined;
     this.ctx = undefined;
     this.playersArr = [];
-    this.gameOver = this.youLose || this.youWin;
-    this.youLose = undefined;
-    this.youWin = undefined;
+    this.gameOver = false;
     this.player1 = undefined;
     this.player2 = undefined;
     this.player3 = undefined;
     this.player4 = undefined;
+    this.circuitsLeft = undefined;
     this.playerPosition = undefined; // 1st,2nd, 3rd
     this.playerScore = 0;
     this.gameScreen = undefined;
@@ -36,26 +35,22 @@ class Game {
       this.ctx,
       this.canvas.width / 2,
       0,
-      undefined,
-      undefined,
       50,
       "/img/players/yellow1.png",
       "space bar",
       undefined,
-      undefined
+      false
     );
     this.player2 = new BlackPlayer(
       this.canvas,
       this.ctx,
       this.canvas.width / 2 - 250,
       0,
-      undefined,
-      undefined,
       50,
       "/img/players/black1.png",
       "a",
       undefined,
-      undefined
+      false
     );
 
     this.player3 = new RedPlayer(
@@ -63,13 +58,11 @@ class Game {
       this.ctx,
       this.canvas.width / 2 - 250,
       0,
-      undefined,
-      undefined,
       50,
       "/img/players/red1.png",
       "p",
       undefined,
-      undefined
+      false
     );
 
     this.player4 = new BluePlayer(
@@ -81,13 +74,11 @@ class Game {
       "/img/players/blue1.png",
       "m",
       undefined,
-      undefined
+      false
     );
 
     // pushes players to playersArr depending on number of players selected
-    const startButton = splashScreen.querySelector("#start-button");
     let numberOfPlayers = splashScreen.querySelector("#dropdown-players");
-    let value = numberOfPlayers.value;
 
     if (numberOfPlayers.selectedIndex === 2) {
       this.playersArr.push(this.player1, this.player2, this.player3);
@@ -105,60 +96,82 @@ class Game {
     //add event listeners
 
     //key down
-    //NOT WORKING
+
     window.addEventListener("keydown", (event) => {
       if (event.key == " ") {
-        this.player1.setDirection("down");
-        this.player1.y += 50;
-        this.player1.updatePosition();
-      } else if (event.key == "a") {
-        this.player2.setDirection("down");
-        this.player2.y += 50;
-        this.player2.updatePosition();
-      } else if (event.key == "p") {
-        this.player2.setDirection("down");
-        this.player2.y += 50;
-        this.player3.updatePosition();
-      } else if (event.key == "m") {
-        this.player4.setDirection("down");
-        this.player4.y += 50;
-        this.player4.updatePosition();
+        if (this.player1.boolean === false) {
+          this.player1.updatePosition();
+          this.player1.boolean = true;
+        }
       }
-      // do something
+      if (event.key == "a") {
+        if (this.player2.boolean === false) {
+          this.player2.updatePosition();
+          this.player2.boolean = true;
+        }
+      }
+      if (event.key == "p") {
+        if (this.player3.boolean === false) {
+          this.player3.updatePosition();
+          this.player3.boolean = true;
+        }
+      }
+      if (event.key == "m") {
+        if (this.player4.boolean === false) {
+          this.player4.updatePosition();
+          this.player4.boolean = true;
+        }
+      }
+    });
+    window.addEventListener("keyup", (event) => {
+      if (event.key == " ") {
+        this.player1.boolean = false;
+      }
+      if (event.key == "a") {
+        this.player2.boolean = false;
+      }
+
+      if (event.key == "p") {
+        this.player3.boolean = false;
+      }
+
+      if (event.key == "m") {
+        this.player4.boolean = false;
+      }
     });
 
     // set path
-    this.playersArr.forEach((element) => element.setRandomPath());
+    // this.playersArr.forEach((element) => element.setRandomPath());
     //start the loop w/ requestAnimationFrame
     this.startLoop();
   }
 
   startLoop() {
     const loop = function () {
+      this.playersArr.forEach((element) => element.drawSprite());
+
       // 1. UPDATE PLAYER STATS
       // 1.1 Check Collisions
 
       // 1.2 update the players
-      //   this.playersArr.forEach((element) => element.updatePosition());
+
       //2. CLEAR CANVAS
 
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      //3. DRAW - UPDATE CANVAS
-
+      //
+      //check if game is over
+      this.gameIsOver();
       // Draws selected number of players
-      this.playersArr.forEach((element) => element.drawSprite());
 
       //4. REPEAT
       if (!this.gameOver) {
         window.requestAnimationFrame(loop);
-      }
+      } else endGame();
     }.bind(this); //can use arrow function instead
     //initial call = starts recursion
-    loop();
-    console.log(this.player1.x, this.player1.y);
+    window.requestAnimationFrame(loop);
   }
 
-  /// TO CONSULT ABOUT PLAYERSARR, THIS PROBABLI WONT WORK
+  /// TO CONSULT ABOUT PLAYERSARR, THIS PROBABLY WONT WORK
   checkCollisions() {
     this.playersArr.forEach(function (player) {
       if (player.didCollide() === true) {
@@ -170,7 +183,30 @@ class Game {
   }
   updateGameStats() {}
 
-  youLose() {}
+  gameIsOver() {
+    //WORKING
+    this.playersArr.forEach((player) => {
+      if (player.y === 700) {
+        this.gameOver = true;
+      }
+    });
 
-  youWin() {}
+    // this.circuitsLeft = Number(
+    //   splashScreen.querySelector("#dropdown-circuits").value
+    // );
+    // console.log(this.circuitsLeft);
+
+    // this.playersArr.forEach((player) => {
+    //   if (this.circuitsLeft === 0) {
+    //     this.GameOver = true;
+    //   }
+    //   if (player.y === 700) {
+    //     this.circuitsLeft--;
+
+    //     removeGameScreen();
+    //     createGameScreen();
+    //   }
+    //   // show the end game screen
+    // });
+  }
 }

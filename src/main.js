@@ -3,8 +3,7 @@
 let splashScreen; // Start Game screen
 let game;
 let gameScreen; // store instance of the current Game
-let youLoseScreen; //Game Over screen
-let youWinScreen; // Winner screen
+let gameOverScreen; // Game over
 
 // helper function to create DOM elements
 function buildDom(htmlString) {
@@ -96,6 +95,7 @@ function createGameScreen() {
   </div>
 </main>
 `);
+
   document.body.appendChild(gameScreen);
   return gameScreen;
 }
@@ -104,8 +104,8 @@ function removeGameScreen() {
 }
 
 // game over screen
-function createYouLoseScreen() {
-  youLoseScreen = buildDom(`
+function createGameOverScreen() {
+  gameOverScreen = buildDom(`
     <main>
         <h1>Game Over</h1>
         <p>Your position: <span></span></p>
@@ -114,42 +114,21 @@ function createYouLoseScreen() {
   		<button class="restart-button">Restart</button>
   	</main>
   `);
-  document.body.appendChild(youLoseScreen);
-  const restartButton = youLoseScreen.querySelector("button");
+  document.body.appendChild(gameOverScreen);
+  const restartButton = gameOverScreen.querySelector("button");
   restartButton.addEventListener("click", startGame);
-}
-function removeYouLoseScreen() {
-  youLoseScreen.remove();
 }
 
-// winner screen
-function createYouWinScreen() {
-  youWinScreen = buildDom(`
-    <main>
-        <h1>Chocovictory!!!</h1>
-        <p>Your position: <span></span></p>
-          <p>Your score: <span></span></p>
-          <p>Congrats! You are the winner of this race!</br>
-          Dare to try again?</p>
-  		<button class="restart-button">Restart</button>
-  	</main>
-  `);
-  document.body.appendChild(youWinScreen);
-  const restartButton = youWinScreen.querySelector("button");
-  restartButton.addEventListener("click", startGame);
-}
-function removeYouWinScreen() {
-  youWinScreen.remove();
+// Game over screen
+function removeGameOverScreen() {
+  gameOverScreen.remove();
 }
 
 // setting the game state
 
 function startGame() {
-  if (youLoseScreen) {
-    removeYouLoseScreen();
-  }
-  if (youWinScreen) {
-    removeYouWinScreen();
+  if (gameOverScreen) {
+    removeGameOverScreen();
   }
   removeSplashScreen();
   createGameScreen();
@@ -157,16 +136,10 @@ function startGame() {
   game = new Game();
   game.gameScreen = gameScreen;
 
-  //start the game
+  // Start the game ...
   game.start();
 }
 function endGame() {
-  if ((playerPosition = 1)) {
-    // to figure out, must be a chocobo caracteristic)
-    gameScreen.remove();
-    createyouWinScreen();
-  } else {
-    gameScreen.remove();
-    createyouLoseScreen();
-  }
+  removeGameScreen();
+  createGameOverScreen();
 }
