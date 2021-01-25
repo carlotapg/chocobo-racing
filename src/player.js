@@ -87,7 +87,7 @@ class Player {
       Math.random() * this.canvas.width,
       Math.random() * this.canvas.height
     );
-    this.ctx.lineTo(this.newX, 800); // Move the pen to end line in straight line
+    this.ctx.lineTo(Math.random() * this.canvas.width, 700); // Move the pen to end line in straight line
     this.ctx.lineWidth = 5;
     this.ctx.strokeStyle = "white";
     this.ctx.stroke(); // Render the path

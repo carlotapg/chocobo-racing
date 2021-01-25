@@ -96,7 +96,6 @@ class Game {
     //add event listeners
 
     //key down
-
     window.addEventListener("keydown", (event) => {
       if (event.key == " ") {
         if (this.player1.boolean === false) {
@@ -123,6 +122,7 @@ class Game {
         }
       }
     });
+    // needs a key up to be able to press key again
     window.addEventListener("keyup", (event) => {
       if (event.key == " ") {
         this.player1.boolean = false;
@@ -141,7 +141,8 @@ class Game {
     });
 
     // set path
-    // this.playersArr.forEach((element) => element.setRandomPath());
+    this.playersArr.forEach((element) => element.setRandomPath());
+
     //start the loop w/ requestAnimationFrame
     this.startLoop();
   }
