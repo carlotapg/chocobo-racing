@@ -79,6 +79,7 @@ function removeSplashScreen() {
 // game screen
 function createGameScreen() {
   gameScreen = buildDom(`   
+<div id="game-body">
  <main class="game-container">
  <header>
   <div class="position">
@@ -94,6 +95,7 @@ function createGameScreen() {
     <canvas id="canvas" width="679" height="690"></canvas>
   </div>
 </main>
+</div>
 `);
 
   document.body.appendChild(gameScreen);
@@ -106,11 +108,14 @@ function removeGameScreen() {
 // game over screen
 function createGameOverScreen() {
   gameOverScreen = buildDom(`
-    <main>
-        <h1>Game Over</h1>
-        <p>Your position: <span></span></p>
-          <p>Your score: <span></span></p>
-          <p> YOU LOSE MESSAGE</p>
+    <main class="game-over" width="auto" height="800">
+        <h1>Race is over</h1>
+        <p>Final positions: <span></span></p>
+          <p><span></span></p>
+          <p>Well done racers!!! </br>
+           Don't forget to pet your chocobos </br> 
+          and feed them some treats </br>
+          Ready for the next one?</p>
   		<button class="restart-button">Restart</button>
   	</main>
   `);

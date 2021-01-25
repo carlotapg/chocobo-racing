@@ -37,7 +37,7 @@ class Game {
       0,
       50,
       "/img/players/yellow1.png",
-      "space bar",
+      "v",
       undefined,
       false
     );
@@ -97,9 +97,11 @@ class Game {
 
     //key down
     window.addEventListener("keydown", (event) => {
-      if (event.key == " ") {
+      if (event.key == "v") {
         if (this.player1.boolean === false) {
           this.player1.updatePosition();
+          // this.player1.setRandomPath(); if doing this, every new step cerates a new line heading to the end line
+          //otherwise, the line wont get printed
           this.player1.boolean = true;
         }
       }
@@ -124,7 +126,7 @@ class Game {
     });
     // needs a key up to be able to press key again
     window.addEventListener("keyup", (event) => {
-      if (event.key == " ") {
+      if (event.key == "v") {
         this.player1.boolean = false;
       }
       if (event.key == "a") {
@@ -187,27 +189,43 @@ class Game {
   gameIsOver() {
     //WORKING
     this.playersArr.forEach((player) => {
-      if (player.y === 700) {
+      if (player.y >= 700) {
         this.gameOver = true;
       }
     });
-
+    //NOT WORKING
     // this.circuitsLeft = Number(
     //   splashScreen.querySelector("#dropdown-circuits").value
     // );
-    // console.log(this.circuitsLeft);
 
+    // this.playersArr.forEach((player) => {
+    //   while (this.circuitsLeft === 0) {
+    //     if (player.y === 700) {
+    //       this.circuitsLeft--;
+    //       gameScreen.remove();
+    //       createGameScreen();
+    //     }
+
+    //     if (this.circuitsLeft === 0) {
+    //       this.gameOver = true;
+    //     }
+    //   }
+    // });
+    //NOT WORKING
+    // this.circuitsLeft = Number(
+    //   splashScreen.querySelector("#dropdown-circuits").value);
+    // );
+    // console.log(this.circuitsLeft);
     // this.playersArr.forEach((player) => {
     //   if (this.circuitsLeft === 0) {
     //     this.GameOver = true;
     //   }
     //   if (player.y === 700) {
     //     this.circuitsLeft--;
-
     //     removeGameScreen();
     //     createGameScreen();
     //   }
-    //   // show the end game screen
+    //
     // });
   }
 }
