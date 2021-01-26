@@ -6,10 +6,12 @@
 /* SPLASH SCREEN */
 body {
   font-family: "Press Start 2P", cursive;
+  font-size: 12px;
   font-weight: bold;
   line-height: 25px;
 }
 #splash-body {
+  color: rgb(107, 58, 17);
   background-image: url("/img/splash-background.jpg");
   background-repeat: no-repeat;
   width: 100vw;
@@ -23,8 +25,8 @@ body {
   height: auto;
   text-align: center;
   float: right;
-  margin: 4rem;
-  padding: 50px 30px;
+  margin-right: 3rem;
+  padding: 30px;
   background-color: rgba(247, 247, 233, 0.3);
 }
 #logo {
@@ -32,8 +34,7 @@ body {
   height: auto;
 }
 #dropdown-container {
-  display: flex;
-  flex-direction: column;
+  float: left;
   width: 30%;
   margin: 15px;
 }
@@ -49,13 +50,20 @@ select {
   border: 1px solid #ebf55c;
   border-radius: 20px;
 }
-#buttons-container {
-  display: flex;
+
+.guide-container {
+  float: right;
+}
+ul {
+  line-height: 5px;
+  font-size: 10px;
+  list-style-type: none;
+  text-align: left;
 }
 
 #start-button {
   font-family: "Press Start 2P", cursive;
-  margin: 20px 100px;
+
   height: 60px;
   padding: 0 10px;
   background-color: #eef588;
@@ -63,7 +71,7 @@ select {
   font-size: 20px;
   font-weight: bold;
   padding: 10px 25px;
-  margin-right: 10px;
+
   border-radius: 20px;
   border: 2px solid rgb(224, 122, 38);
 }
@@ -106,4 +114,7 @@ select {
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.position {
+  padding-right: 200px;
 }

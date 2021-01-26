@@ -79,71 +79,49 @@ class Player {
     // );
   }
 
-  setRandomPath() {
-    //NOT IDEAL
-    //creates a sorted array of numbers from 1 to 700 (canvas height)
-    // function range(start, end) {
-    //   return Array(end - start + 1)
-    //     .fill()
-    //     .map((_, idx) => start + idx);
-    // }
-    // let arr = range(1, 700);
-    // console.log(arr);
-    //creates a random X point every 50 y(vertical) pixels
-    // arr.forEach((integer) => {
-    //   if (integer % 50 === 0) {
-    //     this.ctx.beginPath(); // Start a new path
-    //     this.ctx.moveTo(this.x, integer); // Move the pen to (30, 50)
-
-    //     this.ctx.lineTo(Math.random() * this.canvas.width, integer + 20);
-
-    //     this.ctx.lineWidth = 5;
-    //     this.ctx.strokeStyle = "white";
-    //     this.ctx.stroke(); // Render the path
-    //   }
-    // });
-
-    // WORKING -> creates two points: one in the middle of the screen, other to the finish line
-    // how to set the player to advance this line every 5 pixels when clicking?
-    this.ctx.beginPath(); // Start a new path
-    this.ctx.moveTo(this.x, this.y); // Move the pen to (30, 50)
-
-    let newPoint = this.ctx.lineTo(
-      Math.random() * this.canvas.width,
-      this.canvas.height / 2
-    );
-
-    let finalPoint = this.ctx.lineTo(Math.random() * this.canvas.width, 700); // Move the pen to end line in straight line
-    console.log(this.size);
-    this.ctx.lineWidth = 5;
-    this.ctx.strokeStyle = "white";
-    this.ctx.stroke(); // Render the path
-  }
-
   updatePosition() {
-    this.y += 100; // update player's position
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.y += 20;
+    // update player's vertical position
+    let randomX = Number((Math.random() * this.canvas.width) / 10);
+    this.x += Number(randomX - (Math.random() * this.canvas.width) / 10);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // update player's horizontal position in a random way
+    // this.drawSprite();
     console.log(this.y);
+    console.log(this.x);
   }
 
-  // to be handled with path instead of player
-  handleScreenCollision(path) {}
+  // only considers width
+  handleScreenCollision() {
+    const screenLeft = 0;
+    const screenRight = this.canvas.width;
+
+    const playerLeft = this.x;
+    const playerRight = this.x + this.size;
+
+    if (playerLeft <= screenLeft) {
+      this.x += 20;
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    } else if (playerRight >= screenRight - 50) {
+      this.x -= 20;
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+  }
 
   didCollide(otherPlayer) {
     // STILL TO CHECK
     const playerLeft = this.x + 20; // player size = 114px
     // character occupies 1/3 of the image approximately
-    // will decrease 30px for right and left to compensate square image dimensions
+    // will decrease 20px for right and left to compensate square image dimensions
     // and decreaste 10px for top and bottom
 
-    const playerRight = this.x + this.size - 30;
-    const playerTop = this.y - 10;
-    const playerBottom = this.y - 10 + this.size;
+    const playerRight = this.x + this.size - 20;
+    const playerTop = this.y - 15;
+    const playerBottom = this.y - 15 + this.size;
 
-    const otherPlayerLeft = otherPlayer.x + 30;
-    const otherPlayerRight = otherPlayer.x + otherPlayer.size - 30;
-    const otherPlayerTop = otherPlayer.y + 10;
-    const otherPlayerBottom = otherPlayer.y + otherPlayer.size - 10;
+    const otherPlayerLeft = otherPlayer.x + 20;
+    const otherPlayerRight = otherPlayer.x + otherPlayer.size - 20;
+    const otherPlayerTop = otherPlayer.y + 15;
+    const otherPlayerBottom = otherPlayer.y + otherPlayer.size - 15;
 
     const crossLeft =
       otherPlayerLeft <= playerRight && otherPlayerLeft >= playerLeft;
@@ -156,14 +134,12 @@ class Player {
       otherPlayerBottom >= playerTop && otherPlayerBottom <= playerBottom;
 
     if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
-      return true;
-    } else {
-      return false;
+      this.stunPlayer();
     }
   }
-
   stunPlayer() {
-    this.newY = 0;
+    this.y = 0;
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 }
 

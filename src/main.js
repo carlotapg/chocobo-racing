@@ -25,7 +25,6 @@ function createSplashScreen() {
     to be the first one to reach the finish line. </br>
     Keep your chocobo safe and avoid </br> colliding 
     with other players</p>
-    <div id="buttons-container">
       <div id="dropdown-container">
        <select id="dropdown-players">
        <option value="select" disabled selected hidden>Number of players</option>
@@ -33,15 +32,18 @@ function createSplashScreen() {
          <option value="3">3 players</option>
          <option value="4">4 players</option>
        </select>
-       <select id="dropdown-circuits" placeholder="number of circuits">
-         <option value="select" disabled selected hidden>Number of circuits</option>
-         <option value="1">1</option>
-         <option value="2">2</option>
-         <option value="3">3</option>
-       </select>
-       </div>
+       <div>
        <button id="start-button">Start game</button>
     </div>
+    </div>
+       <div class="guide-container">
+       <ul>
+       <li>Player 1<img class="minis" src="./img/players/1.png"> Press V</li>
+       <li>Player 2<img class="minis" src="./img/players/2.png"> Press A</li>
+       <li>Player 3<img class="minis" src="./img/players/3.png"> Press P</li>
+       <li>Player 4<img class="minis" src="./img/players/4.png"> Press M</li>
+       </div>
+       
     </div>
     </main>
     
@@ -60,11 +62,8 @@ function createSplashScreen() {
   //makes number of players/circuits mandatory before launching game screen
 
   startButton.addEventListener("click", function () {
-    if (
-      numberOfPlayers.selectedIndex === 0 ||
-      numberOfCircuits.selectedIndex === 0
-    ) {
-      alert("Please select number of players and circuits");
+    if (numberOfPlayers.selectedIndex === 0) {
+      alert("Please select number of players");
     } else {
       startGame();
     }
@@ -81,15 +80,16 @@ function createGameScreen() {
   gameScreen = buildDom(`   
 <div id="game-body">
  <main class="game-container">
+ <div class="position">
+    <span class="label">Positions</br>
+    1st:  </br>
+    2nd:  </br>
+    3rd:   </br>
+    4th:   </br>
+    </span>
+  </div>
  <header>
-  <div class="position">
-    <span class="label">Position:</span>
-    <span class="value"></span>
-  </div>
-  <div class="score">
-      <span class="label">Score:</span>
-      <span class="value"></span>
-  </div>
+  
 </header>
   <div class="canvas-container">
     <canvas id="canvas" width="679" height="690"></canvas>

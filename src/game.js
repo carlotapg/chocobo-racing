@@ -142,9 +142,6 @@ class Game {
       }
     });
 
-    // set path
-    this.playersArr.forEach((element) => element.setRandomPath());
-
     //start the loop w/ requestAnimationFrame
     this.startLoop();
   }
@@ -154,10 +151,14 @@ class Game {
       this.playersArr.forEach((element) => element.drawSprite());
 
       // 1. UPDATE PLAYER STATS
-      // 1.1 Check Collisions
+      // 1.1 Check Player Collisions
+      //
+      this.updateGameStats();
+      // 1.1 Check Screen Collision
+      this.playersArr.forEach((element) => element.handleScreenCollision());
 
       // 1.2 update the players
-
+      this.checkCollisions();
       //2. CLEAR CANVAS
 
       //
@@ -174,17 +175,35 @@ class Game {
     window.requestAnimationFrame(loop);
   }
 
-  /// TO CONSULT ABOUT PLAYERSARR, THIS PROBABLY WONT WORK
   checkCollisions() {
-    this.playersArr.forEach(function (player) {
-      if (player.didCollide() === true) {
-        // to put some sound / animation / stun seconds
-        player.y = 0;
-        player.setRandomPath();
-      }
-    });
+    // LOSERS CHOICE
+    // let newArr = JSON.parse(JSON.stringify(this.playersArr)).splice(index);
+    // if (this.player1.didCollide(this.player2))
+    //  NOT WORKING
+    //  this.playersArr.forEach((player, index) => {
+    //   let newArr = JSON.parse(JSON.stringify(this.playersArr)).splice(index);
+    //   console.log(newArr);
+    //   newArr.forEach((enemy) => {
+    //     if (player.didCollide(enemy) === true) {
+    //       // to put some sound / animation / stun seconds
+    //       player.stunPlayer();
+    //     }
+    //   });
+    // });
   }
-  updateGameStats() {}
+
+  updateGameStats() {
+    let yPosition = [
+      this.player1.y,
+      this.player2.y,
+      this.player3.y,
+      this.player4.y,
+    ];
+    let sortedArr = yPosition.sort(function (a, b) {
+      return a - b;
+    });
+    console.log(sortedArr);
+  }
 
   gameIsOver() {
     //WORKING
