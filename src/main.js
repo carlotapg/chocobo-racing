@@ -32,16 +32,16 @@ function createSplashScreen() {
          <option value="3">3 players</option>
          <option value="4">4 players</option>
        </select>
-       <div>
+       <div id="button container">
        <button id="start-button">Start game</button>
     </div>
     </div>
        <div class="guide-container">
        <ul>
-       <li>Player 1<img class="minis" src="./img/players/1.png"> Press V</li>
-       <li>Player 2<img class="minis" src="./img/players/2.png"> Press A</li>
-       <li>Player 3<img class="minis" src="./img/players/3.png"> Press P</li>
-       <li>Player 4<img class="minis" src="./img/players/4.png"> Press M</li>
+       <li>Player 1<img class="minis" src="img/players/yellow-chocobo.gif"> Press V</li>
+       <li>Player 2<img class="minis" src="img/players/black-chocobo.gif"> Press A</li>
+       <li>Player 3<img class="minis" src="img/players/red-chocobo.gif"> Press P</li>
+       <li>Player 4<img class="minis" src="img/players/blue-chocobo.gif"> Press M</li>
        </div>
        
     </div>
@@ -79,8 +79,7 @@ function removeSplashScreen() {
 function createGameScreen() {
   gameScreen = buildDom(`   
 <div id="game-body">
- <main class="game-container">
- <div class="position">
+<div class="position">
     <span class="label">Positions</br>
     1st:  </br>
     2nd:  </br>
@@ -88,8 +87,8 @@ function createGameScreen() {
     4th:   </br>
     </span>
   </div>
+ <main class="game-container">
  <header>
-  
 </header>
   <div class="canvas-container">
     <canvas id="canvas" width="679" height="690"></canvas>

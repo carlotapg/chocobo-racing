@@ -34,7 +34,7 @@ body {
   height: auto;
 }
 #dropdown-container {
-  float: left;
+  float: center;
   width: 30%;
   margin: 15px;
 }
@@ -52,8 +52,9 @@ select {
 }
 
 .guide-container {
-  float: right;
+  float: bottom;
 }
+
 ul {
   line-height: 5px;
   font-size: 10px;
@@ -82,6 +83,10 @@ ul {
   box-shadow: 5px 5px #5a5a3b;
 }
 
+.minis {
+  width: 8%;
+  height: auto;
+}
 /* GAME SCREEN */
 
 #canvas-container {
@@ -102,6 +107,7 @@ ul {
   right: 0;
   margin: auto;
 }
+
 /* GAME OVER SCREEN */
 .game-over {
   background-image: url("/img/background/bk5.jpeg");
@@ -116,5 +122,5 @@ ul {
   background-size: cover;
 }
 .position {
-  padding-right: 200px;
+  padding: 1.5rem;
 }

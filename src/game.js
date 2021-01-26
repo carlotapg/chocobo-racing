@@ -9,9 +9,11 @@ class Game {
     this.player3 = undefined;
     this.player4 = undefined;
     this.circuitsLeft = undefined;
-    this.playerPosition = undefined; // 1st,2nd, 3rd
-    this.playerScore = 0;
     this.gameScreen = undefined;
+    this.first = undefined;
+    this.second = undefined;
+    this.third = undefined;
+    this.fourth = undefined;
   }
 
   start() {
@@ -100,26 +102,28 @@ class Game {
       if (event.key == "v") {
         if (this.player1.boolean === false) {
           this.player1.updatePosition();
-          // this.player1.setRandomPath(); if doing this, every new step cerates a new line heading to the end line
-          //otherwise, the line wont get printed
+          this.checkCollisions(this.player1);
           this.player1.boolean = true;
         }
       }
       if (event.key == "a") {
         if (this.player2.boolean === false) {
           this.player2.updatePosition();
+          this.checkCollisions(this.player2);
           this.player2.boolean = true;
         }
       }
       if (event.key == "p") {
         if (this.player3.boolean === false) {
           this.player3.updatePosition();
+          this.checkCollisions(this.player3);
           this.player3.boolean = true;
         }
       }
       if (event.key == "m") {
         if (this.player4.boolean === false) {
           this.player4.updatePosition();
+          this.checkCollisions(this.player4);
           this.player4.boolean = true;
         }
       }
@@ -158,8 +162,8 @@ class Game {
       this.playersArr.forEach((element) => element.handleScreenCollision());
 
       // 1.2 update the players
-      this.checkCollisions();
-      //2. CLEAR CANVAS
+
+      this.playersArr.forEach((element) => this.checkCollisions(element));
 
       //
       //check if game is over
@@ -175,21 +179,22 @@ class Game {
     window.requestAnimationFrame(loop);
   }
 
-  checkCollisions() {
+  checkCollisions(eachPlayer) {
     // LOSERS CHOICE
     // let newArr = JSON.parse(JSON.stringify(this.playersArr)).splice(index);
-    // if (this.player1.didCollide(this.player2))
+    // if (this.player1.didCollide(this.player2)) bl bls bls
     //  NOT WORKING
-    //  this.playersArr.forEach((player, index) => {
-    //   let newArr = JSON.parse(JSON.stringify(this.playersArr)).splice(index);
-    //   console.log(newArr);
-    //   newArr.forEach((enemy) => {
-    //     if (player.didCollide(enemy) === true) {
-    //       // to put some sound / animation / stun seconds
-    //       player.stunPlayer();
-    //     }
-    //   });
-    // });
+    let newArr = [...this.playersArr].filter(
+      (chocobo) => chocobo !== eachPlayer
+    );
+    console.log(newArr);
+    newArr.forEach((enemy) => {
+      if (enemy.didCollide(eachPlayer) === true) {
+        // to put some sound / animation / stun seconds
+        player.stunPlayer();
+      }
+      // didCollide(otherPlayer)
+    });
   }
 
   updateGameStats() {
@@ -199,10 +204,14 @@ class Game {
       this.player3.y,
       this.player4.y,
     ];
+    // sorts the players array in descending order
     let sortedArr = yPosition.sort(function (a, b) {
-      return a - b;
+      return b - a;
     });
-    console.log(sortedArr);
+    sortedArr[0];
+    sortedArr[1];
+    sortedArr[2];
+    sortedArr[3];
   }
 
   gameIsOver() {

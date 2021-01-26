@@ -8,7 +8,7 @@ class Player {
     this.y = 0;
     this.newX = undefined;
     this.newY = undefined;
-    this.size = 50;
+    this.size = 75;
     this.imgSrc = "/img/players/yellow1.png";
     this.key = "v";
     this.path = undefined; // randomized with Math.floor
@@ -115,13 +115,13 @@ class Player {
     // and decreaste 10px for top and bottom
 
     const playerRight = this.x + this.size - 20;
-    const playerTop = this.y - 15;
-    const playerBottom = this.y - 15 + this.size;
+    const playerTop = this.y - 10;
+    const playerBottom = this.y - 10 + this.size;
 
     const otherPlayerLeft = otherPlayer.x + 20;
     const otherPlayerRight = otherPlayer.x + otherPlayer.size - 20;
-    const otherPlayerTop = otherPlayer.y + 15;
-    const otherPlayerBottom = otherPlayer.y + otherPlayer.size - 15;
+    const otherPlayerTop = otherPlayer.y + 10;
+    const otherPlayerBottom = otherPlayer.y + otherPlayer.size - 10;
 
     const crossLeft =
       otherPlayerLeft <= playerRight && otherPlayerLeft >= playerLeft;
@@ -134,11 +134,15 @@ class Player {
       otherPlayerBottom >= playerTop && otherPlayerBottom <= playerBottom;
 
     if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
-      this.stunPlayer();
+      this.stunPlayer(otherPlayer);
     }
   }
-  stunPlayer() {
+  stunPlayer(enemy) {
     this.y = 0;
+    enemy.y = 0;
+    this.x += 20;
+    enemy.x -= 20;
+
     // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 }
