@@ -9,6 +9,8 @@ body {
   font-size: 12px;
   font-weight: bold;
   line-height: 25px;
+  justify-content: space-evenly;
+  color: rgb(107, 58, 17);
 }
 #splash-body {
   color: rgb(107, 58, 17);
@@ -16,7 +18,6 @@ body {
   background-repeat: no-repeat;
   width: 100vw;
   height: 100vh;
-
   background-size: cover;
 }
 #instructions-container {
@@ -30,29 +31,26 @@ body {
   background-color: rgba(247, 247, 233, 0.3);
 }
 #logo {
-  width: 65%;
+  width: 50%;
   height: auto;
 }
 #dropdown-container {
+  margin-top: 1rem;
+  width: 100%;
   float: center;
-  width: 30%;
-  margin: 15px;
+  flex-wrap: wrap;
 }
 select {
   font-family: "Press Start 2P", cursive;
   font-size: 11px;
-  width: 250px;
-  height: 30px;
+  width: 15rem;
+  height: 2rem;
   margin: 10px;
   padding-left: 10px;
   background-color: rgb(245, 245, 223);
   color: brown;
   border: 1px solid #ebf55c;
   border-radius: 20px;
-}
-
-.guide-container {
-  float: bottom;
 }
 
 ul {
@@ -64,15 +62,12 @@ ul {
 
 #start-button {
   font-family: "Press Start 2P", cursive;
-
   height: 60px;
-  padding: 0 10px;
+  padding: 1rem 2rem;
   background-color: #eef588;
   color: white;
   font-size: 20px;
   font-weight: bold;
-  padding: 10px 25px;
-
   border-radius: 20px;
   border: 2px solid rgb(224, 122, 38);
 }
@@ -82,19 +77,30 @@ ul {
   background-color: #eef588;
   box-shadow: 5px 5px #5a5a3b;
 }
+.guide-container {
+  margin-top: 1rem;
+  float: right;
+}
 
 .minis {
   width: 8%;
   height: auto;
 }
 /* GAME SCREEN */
+#game-body {
+  background-image: url("/img/body-background.png");
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 #canvas-container {
-  height: 800px;
+  height: 100vh;
 }
 
 .game-container {
-  background-image: url("/img/background/bk1.jpeg");
+  background-image: url("/img/background/4.jpeg");
 
   background-size: cover;
   background-repeat: no-repeat;
@@ -110,17 +116,32 @@ ul {
 
 /* GAME OVER SCREEN */
 .game-over {
-  background-image: url("/img/background/bk5.jpeg");
+  background-image: url("/img/game-over.jpg");
   width: 100vw;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: left;
 }
-#game-body {
-  background-image: url("/img/body-background.png");
-  width: 100vw;
-  height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 .position {
-  padding: 1.5rem;
+  display: inline-block;
+  width: 20%;
+  height: auto;
+}
+#stats-container {
+  border-radius: 50px;
+  width: 40%;
+  height: auto;
+  text-align: center;
+  vertical-align: center;
+  margin-left: 20vh;
+  background-color: rgba(247, 247, 233, 0.3);
+}
+/* music & sounds */
+#main-song {
+  display: none;
+}
+#win {
+  display: none;
 }

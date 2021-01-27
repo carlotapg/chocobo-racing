@@ -1,7 +1,20 @@
 "use strict";
 
 class Player {
-  constructor(canvas, ctx, x, y, newX, newY, size, imgSrc, key, path, boolean) {
+  constructor(
+    canvas,
+    ctx,
+    x,
+    y,
+    newX,
+    newY,
+    size,
+    imgSrc,
+    key,
+    path,
+    boolean,
+    name
+  ) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     this.x = this.canvas.width / 2;
@@ -13,6 +26,7 @@ class Player {
     this.key = "v";
     this.path = undefined; // randomized with Math.floor
     this.boolean = false; // depends on clicks
+    this.name = "Player 1";
   }
 
   drawSprite() {
@@ -80,14 +94,12 @@ class Player {
   }
 
   updatePosition() {
-    this.y += 20;
+    this.y += 200;
     // update player's vertical position
     let randomX = Number((Math.random() * this.canvas.width) / 10);
     this.x += Number(randomX - (Math.random() * this.canvas.width) / 10);
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // update player's horizontal position in a random way
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     // this.drawSprite();
-    console.log(this.y);
-    console.log(this.x);
   }
 
   // only considers width
@@ -99,27 +111,27 @@ class Player {
     const playerRight = this.x + this.size;
 
     if (playerLeft <= screenLeft) {
-      this.x += 20;
+      this.x += 10;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     } else if (playerRight >= screenRight - 50) {
-      this.x -= 20;
+      this.x -= 10;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
   }
 
   didCollide(otherPlayer) {
     // STILL TO CHECK
-    const playerLeft = this.x + 20; // player size = 114px
+    const playerLeft = this.x + 30; // player size = 114px
     // character occupies 1/3 of the image approximately
-    // will decrease 20px for right and left to compensate square image dimensions
+    // will decrease 30px for right and left to compensate square image dimensions
     // and decreaste 10px for top and bottom
 
-    const playerRight = this.x + this.size - 20;
+    const playerRight = this.x + this.size - 30;
     const playerTop = this.y - 10;
     const playerBottom = this.y - 10 + this.size;
 
-    const otherPlayerLeft = otherPlayer.x + 20;
-    const otherPlayerRight = otherPlayer.x + otherPlayer.size - 20;
+    const otherPlayerLeft = otherPlayer.x + 30;
+    const otherPlayerRight = otherPlayer.x + otherPlayer.size - 30;
     const otherPlayerTop = otherPlayer.y + 10;
     const otherPlayerBottom = otherPlayer.y + otherPlayer.size - 10;
 
@@ -140,41 +152,44 @@ class Player {
   stunPlayer(enemy) {
     this.y = 0;
     enemy.y = 0;
-    this.x += 20;
-    enemy.x -= 20;
+    this.x += 60;
+    enemy.x -= 60;
 
     // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 }
 
 class BlackPlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean) {
+  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean, name) {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 - 125;
     this.y = 0;
     this.imgSrc = "/img/players/black1.png";
     this.key = "a";
     this.path = undefined;
+    this.name = "Player 2";
   }
 }
 class RedPlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean) {
+  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean, name) {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 - 250;
     this.y = 0;
     this.imgSrc = "/img/players/red1.png";
     this.key = "p";
     this.path = undefined;
+    this.name = "Player 3";
   }
 }
 
 class BluePlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean) {
+  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean, name) {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 + 125;
     this.y = 0;
     this.imgSrc = "/img/players/blue1.png";
     this.key = "m";
     this.path = undefined;
+    this.name = "Player 4";
   }
 }

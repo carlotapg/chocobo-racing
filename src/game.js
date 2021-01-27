@@ -25,11 +25,12 @@ class Game {
     const containerHeight = canvasContainer.clientHeight;
     this.canvas.setAttribute("height", containerHeight);
     this.canvas.setAttribute("width", containerWidth);
-    //saves reference to score
-    this.playerScore = document.querySelector(".score .value");
 
     //saves reference to position
-    this.playerPosition = document.querySelector(".position .value");
+    this.firstPosition = document.querySelector(".label .first");
+    this.secondPosition = document.querySelector(".label .second");
+    this.thirdPosition = document.querySelector(".label .third");
+    this.fourthPosition = document.querySelector(".label .fourth");
 
     // creates players
     this.player1 = new Player(
@@ -41,7 +42,8 @@ class Game {
       "/img/players/yellow1.png",
       "v",
       undefined,
-      false
+      false,
+      "Player 1"
     );
     this.player2 = new BlackPlayer(
       this.canvas,
@@ -52,7 +54,8 @@ class Game {
       "/img/players/black1.png",
       "a",
       undefined,
-      false
+      false,
+      "Player 2"
     );
 
     this.player3 = new RedPlayer(
@@ -64,7 +67,8 @@ class Game {
       "/img/players/red1.png",
       "p",
       undefined,
-      false
+      false,
+      "Player 3"
     );
 
     this.player4 = new BluePlayer(
@@ -76,7 +80,8 @@ class Game {
       "/img/players/blue1.png",
       "m",
       undefined,
-      false
+      false,
+      "Player 4"
     );
 
     // pushes players to playersArr depending on number of players selected
@@ -146,6 +151,8 @@ class Game {
       }
     });
 
+    this.playSong();
+
     //start the loop w/ requestAnimationFrame
     this.startLoop();
   }
@@ -174,6 +181,7 @@ class Game {
       if (!this.gameOver) {
         window.requestAnimationFrame(loop);
       } else endGame();
+      this.playWinSound();
     }.bind(this); //can use arrow function instead
     //initial call = starts recursion
     window.requestAnimationFrame(loop);
@@ -198,20 +206,32 @@ class Game {
   }
 
   updateGameStats() {
-    let yPosition = [
-      this.player1.y,
-      this.player2.y,
-      this.player3.y,
-      this.player4.y,
-    ];
+    let yPosition = [this.player1, this.player2, this.player3, this.player4];
     // sorts the players array in descending order
     let sortedArr = yPosition.sort(function (a, b) {
-      return b - a;
+      return b.y - a.y;
     });
-    sortedArr[0];
-    sortedArr[1];
-    sortedArr[2];
-    sortedArr[3];
+    // ????
+    let numberOfPlayers = splashScreen.querySelector("#dropdown-players");
+
+    if (numberOfPlayers.selectedIndex === 2) {
+      this.firstPosition.textContent = sortedArr[0].name;
+      this.secondPosition.textContent = sortedArr[1].name;
+      this.thirdPosition.textContent = sortedArr[2].name;
+    } else if (numberOfPlayers.selectedIndex === 3) {
+      this.firstPosition.textContent = sortedArr[0].name;
+      this.secondPosition.textContent = sortedArr[1].name;
+      this.thirdPosition.textContent = sortedArr[2].name;
+      this.fourthPosition.textContent = sortedArr[3].name;
+    } else if (numberOfPlayers.selectedIndex === 1) {
+      this.firstPosition.textContent = sortedArr[0].name;
+      this.secondPosition.textContent = sortedArr[1].name;
+    }
+
+    // this.firstPosition.textContent = sortedArr[0].name;
+    // this.secondPosition.textContent = sortedArr[1].name;
+    // this.thirdPosition.textContent = sortedArr[2].name;
+    // this.fourthPosition.textContent = sortedArr[3].name;
   }
 
   gameIsOver() {
@@ -221,39 +241,16 @@ class Game {
         this.gameOver = true;
       }
     });
-    //NOT WORKING
-    // this.circuitsLeft = Number(
-    //   splashScreen.querySelector("#dropdown-circuits").value
-    // );
+  }
 
-    // this.playersArr.forEach((player) => {
-    //   while (this.circuitsLeft === 0) {
-    //     if (player.y === 700) {
-    //       this.circuitsLeft--;
-    //       gameScreen.remove();
-    //       createGameScreen();
-    //     }
-
-    //     if (this.circuitsLeft === 0) {
-    //       this.gameOver = true;
-    //     }
-    //   }
-    // });
-    //NOT WORKING
-    // this.circuitsLeft = Number(
-    //   splashScreen.querySelector("#dropdown-circuits").value);
-    // );
-    // console.log(this.circuitsLeft);
-    // this.playersArr.forEach((player) => {
-    //   if (this.circuitsLeft === 0) {
-    //     this.GameOver = true;
-    //   }
-    //   if (player.y === 700) {
-    //     this.circuitsLeft--;
-    //     removeGameScreen();
-    //     createGameScreen();
-    //   }
-    //
-    // });
+  playSong() {
+    const audioElement = document.querySelector("#main-song");
+    audioElement.currentTime = 0;
+    audioElement.play();
+  }
+  playWinSound() {
+    const audioElement = document.querySelector("#win");
+    audioElement.currentTime = 0;
+    audioElement.play();
   }
 }

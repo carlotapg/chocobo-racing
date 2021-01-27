@@ -24,7 +24,8 @@ function createSplashScreen() {
     <p> Press a given key as fast as possible </br>
     to be the first one to reach the finish line. </br>
     Keep your chocobo safe and avoid </br> colliding 
-    with other players</p>
+    with other players. </br>
+    Careful, they're easily distracted </br>and may take unexpected paths.  </p>
       <div id="dropdown-container">
        <select id="dropdown-players">
        <option value="select" disabled selected hidden>Number of players</option>
@@ -79,12 +80,16 @@ function removeSplashScreen() {
 function createGameScreen() {
   gameScreen = buildDom(`   
 <div id="game-body">
+<audio controls id="main-song">
+  <source src="/audio/song.mp3" type="audio/mpeg" autoplay>
+</audio>
 <div class="position">
-    <span class="label">Positions</br>
-    1st:  </br>
-    2nd:  </br>
-    3rd:   </br>
-    4th:   </br>
+<span class="label">Positions</br>
+<p>1st:<span class="first"></span></br>
+2nd:<span class="second"></span></br>
+3rd:<span class="third"></span></br>
+4th:<span class="fourth"></span></br>
+</p>
     </span>
   </div>
  <main class="game-container">
@@ -108,14 +113,24 @@ function removeGameScreen() {
 function createGameOverScreen() {
   gameOverScreen = buildDom(`
     <main class="game-over" width="auto" height="800">
+    <audio controls id="win">
+  <source src="/audio/win.mp3" type="audio/mpeg" autoplay>
+  </audio>
+  <div id="stats-container"
         <h1>Race is over</h1>
-        <p>Final positions: <span></span></p>
-          <p><span></span></p>
-          <p>Well done racers!!! </br>
-           Don't forget to pet your chocobos </br> 
-          and feed them some treats </br>
+        <p>Final positions:</br>
+        1st:<span class="go-first"></span></br>
+        2nd:<span class="go-second"></span></br>
+        3rd:<span class="go-third"></span></br>
+        4th:<span class="go-fourth"></span></br>
+        </p>
+          
+          Well done racers!!! </br>
+           Don't forget to pet your chocobos </br>
+          and feed them  some treats </br> 
           Ready for the next one?</p>
-  		<button class="restart-button">Restart</button>
+      <button class="restart-button">Restart</button>
+      </div>
   	</main>
   `);
   document.body.appendChild(gameOverScreen);
