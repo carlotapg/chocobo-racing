@@ -14,7 +14,7 @@ body {
 }
 #splash-body {
   color: rgb(107, 58, 17);
-  background-image: url("/img/splash-background.jpg");
+  background-image: url("../img/splash-background.jpg");
   background-repeat: no-repeat;
   width: 100vw;
   height: 100vh;
@@ -88,7 +88,7 @@ ul {
 }
 /* GAME SCREEN */
 #game-body {
-  background-image: url("/img/body-background.png");
+  background-image: url("../img/body-background.png");
   width: 100vw;
   height: 100vh;
   background-repeat: no-repeat;
@@ -107,7 +107,7 @@ ul {
 }
 
 .game-container {
-  background-image: url("/img/background/4.jpeg");
+  background-image: url("../img/background/4.jpeg");
 
   background-size: cover;
   background-repeat: no-repeat;
@@ -123,7 +123,7 @@ ul {
 
 /* GAME OVER SCREEN */
 .game-over {
-  background-image: url("/img/game-over.jpg");
+  background-image: url("../img/game-over.jpg");
   width: 100vw;
   height: 100vh;
   display: flex;
