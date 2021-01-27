@@ -22,7 +22,7 @@ class Player {
     this.newX = undefined;
     this.newY = undefined;
     this.size = 75;
-    this.imgSrc = "/img/players/yellow1.png";
+    this.imgSrc = "img/players/yellow1.png";
     this.key = "v";
     this.path = undefined; // randomized with Math.floor
     this.boolean = false; // depends on clicks
@@ -164,7 +164,7 @@ class BlackPlayer extends Player {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 - 125;
     this.y = 0;
-    this.imgSrc = "/img/players/black1.png";
+    this.imgSrc = "img/players/black1.png";
     this.key = "a";
     this.path = undefined;
     this.name = "Player 2";
@@ -175,7 +175,7 @@ class RedPlayer extends Player {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 - 250;
     this.y = 0;
-    this.imgSrc = "/img/players/red1.png";
+    this.imgSrc = "img/players/red1.png";
     this.key = "p";
     this.path = undefined;
     this.name = "Player 3";
@@ -187,7 +187,7 @@ class BluePlayer extends Player {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 + 125;
     this.y = 0;
-    this.imgSrc = "/img/players/blue1.png";
+    this.imgSrc = "img/players/blue1.png";
     this.key = "m";
     this.path = undefined;
     this.name = "Player 4";

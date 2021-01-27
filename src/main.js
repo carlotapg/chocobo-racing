@@ -18,9 +18,8 @@ function buildDom(htmlString) {
 function createSplashScreen() {
   splashScreen = buildDom(`
   <main id="splash-body">
-  <img src="" />
   <div id="instructions-container">
-    <img src="/img/logo.png" id="logo"/>
+    <img src="img/logo.png" id="logo"/>
     <p> Press a given key as fast as possible </br>
     to be the first one to reach the finish line. </br>
     Keep your chocobo safe and avoid </br> colliding 
@@ -81,7 +80,7 @@ function createGameScreen() {
   gameScreen = buildDom(`   
 <div id="game-body">
 <audio controls id="main-song">
-  <source src="/audio/song.mp3" type="audio/mpeg" autoplay>
+  <source src="audio/song.mp3" type="audio/mpeg" autoplay>
 </audio>
 <div class="position">
 <span class="label">Positions</br>
@@ -114,7 +113,7 @@ function createGameOverScreen() {
   gameOverScreen = buildDom(`
     <main class="game-over" width="auto" height="800">
     <audio controls id="win">
-  <source src="/audio/win.mp3" type="audio/mpeg" autoplay>
+  <source src="audio/win.mp3" type="audio/mpeg" autoplay>
   </audio>
   <div id="stats-container"
         <h1>Race is over</h1>
