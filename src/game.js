@@ -8,8 +8,10 @@ class Game {
     this.player2 = undefined;
     this.player3 = undefined;
     this.player4 = undefined;
-    this.circuitsLeft = undefined;
     this.gameScreen = undefined;
+    this.winner = undefined;
+    this.runners = [];
+    // find winner and remove them
   }
 
   start() {
@@ -154,7 +156,7 @@ class Game {
     });
 
     this.playSong();
-
+    this.displayCountdown();
     //start the loop w/ requestAnimationFrame
     this.startLoop();
   }
@@ -202,6 +204,37 @@ class Game {
     });
   }
 
+  displayCountdown() {
+    var interval;
+    var seconds = 3;
+    window.onload = function () {
+      countdown("countdown");
+    };
+
+    let countdown = (element) => {
+      interval = setInterval(() => {
+        var el = document.querySelector("#countdown");
+        if (seconds == 0) {
+          if (minutes == 0) {
+            el.innerHTML = "countdown's over!";
+            clearInterval(interval);
+            return;
+          } else {
+            seconds = 3;
+          }
+        }
+        if (minutes > 0) {
+          var minute_text = minutes + (minutes > 1 ? " minutes" : " minute");
+        } else {
+          var minute_text = "";
+        }
+        var second_text = seconds > 1 ? "seconds" : "second";
+        el.innerHTML =
+          minute_text + " " + seconds + " " + second_text + " remaining";
+        seconds--;
+      }, 1000);
+    };
+  }
   updateGameStats() {
     let yPosition = [this.player1, this.player2, this.player3, this.player4];
     // sorts the players array in descending order
@@ -212,87 +245,22 @@ class Game {
     let numberOfPlayers = splashScreen.querySelector("#dropdown-players");
 
     if (numberOfPlayers.selectedIndex === 2) {
+      this.winner = sortedArr[0].name;
       this.firstPosition.textContent = sortedArr[0].name;
       this.secondPosition.textContent = sortedArr[1].name;
       this.thirdPosition.textContent = sortedArr[2].name;
     } else if (numberOfPlayers.selectedIndex === 3) {
+      this.winner = sortedArr[0].name;
       this.firstPosition.textContent = sortedArr[0].name;
       this.secondPosition.textContent = sortedArr[1].name;
       this.thirdPosition.textContent = sortedArr[2].name;
       this.fourthPosition.textContent = sortedArr[3].name;
+      this.winner = sortedArr[0].name;
     } else if (numberOfPlayers.selectedIndex === 1) {
       this.firstPosition.textContent = sortedArr[0].name;
-
       this.secondPosition.textContent = sortedArr[1].name;
+      this.winner = sortedArr[0].name;
     }
-
-    // Get the string data  from localStorage
-    // Convert it to an array
-
-    this.newScore1 = sortedArr[0].name;
-    this.newScore2 = sortedArr[1].name;
-    this.newScore3 = sortedArr[2].name;
-    this.newScore4 = sortedArr[3].name;
-
-    // function saveScore(name) {
-    //   // Add new score to the array
-    //   if (!scoreStr) {
-    //     let scoreArr = [];
-    //     scoreArr.push(newScore1, newScore2, newScore3, newScore4);
-    //   } else if (scoreStr) {
-    //     scoreArr = JSON.parse(newScore1, newScore2, newScore3, newScore4);
-    //     scoreArr.push(newScore1, newScore2, newScore3, newScore4);
-    //   }
-
-    //   // Stringify the updated score array
-    //   const updatedScoreStr = JSON.stringify(scoreArr);
-    //   // Store back the updated array string
-    //   localStorage.setItem("score", updatedScoreStr);
-    // }
-
-    // function getScores() {
-    //   const scoreStr = localStorage.getItem("score");
-    //   // Add new score to the array
-    //   if (!scoreStr) {
-    //     let scoreArr = [];
-    //   } else if (scoreStr) {
-    //     scoreArr = JSON.parse(scoreStr);
-    //   }
-
-    //   return scoreArr;
-    // }
-
-    // saveScore('Uros', 1234);
-
-    // const v = getScores();
-    // console.log("v", v);
-
-    // ------------------------------------------------------------------------------
-    // showFinalStats(){
-    //   this.updateGameStats();
-
-    // this.first.textContent = sortedArr[0].name; // + `<img src=${sortedArr[0].gifSrc}</img>`;
-    // this.second.textContent = sortedArr[1].name; //+ `<img src=${sortedArr[1].gifSrc}</img>`;
-    // this.third.textContent = sortedArr[2].name; //+ `<img src=${sortedArr[2].gifSrc}</img>`;
-    // this.fourth.textContent = sortedArr[3].name; //+ `<img src=${sortedArr[3].gifSrc}</img>`;
-    console.log(this.first);
-    console.log(this.second);
-    // }
-    //final stats:
-
-    //   if (numberOfPlayers.selectedIndex === 2) {
-    //     this.firstPosition.textContent = sortedArr[0].name + sortedArr[0].gifSrc;
-    //     this.secondPosition.textContent = sortedArr[1].name + sortedArr[1].gifSrc;
-    //     this.thirdPosition.textContent = sortedArr[2].name + sortedArr[2].gifSrc;
-    //   } else if (numberOfPlayers.selectedIndex === 3) {
-    //     this.firstPosition.textContent = sortedArr[0].name + sortedArr[0].gifSrc;
-    //     this.secondPosition.textContent = sortedArr[1].name + sortedArr[1].gifSrc;
-    //     this.thirdPosition.textContent = sortedArr[2].name + sortedArr[2].gifSrc;
-    //     this.fourthPosition.textContent = sortedArr[3].name + sortedArr[2].gifSrc;
-    //   } else if (numberOfPlayers.selectedIndex === 1) {
-    //     this.firstPosition.textContent = sortedArr[0].name + sortedArr[0].gifSrc;
-    //     this.secondPosition.textContent = sortedArr[1].name + sortedArr[1].gifSrc;
-    //
   }
 
   gameIsOver() {
@@ -310,8 +278,7 @@ class Game {
     audioElement.play();
   }
   playWinSound() {
-    const audioElement = document.querySelector("#win");
-    audioElement.currentTime = 0;
-    audioElement.play();
+    const audioSound = document.querySelector("#win");
+    audioSound.play();
   }
 }

@@ -77,6 +77,19 @@ function removeSplashScreen() {
 
 // game screen
 function createGameScreen() {
+  // generates random background wevery time the page is reloaded
+  const backgroundArr = [
+    "img/background/0.jpeg",
+    "img/background/1.jpeg",
+    "img/background/2.jpeg",
+    "img/background/3.jpeg",
+    "img/background/4.jpeg",
+    "img/background/5.jpeg",
+    "img/background/6.jpeg",
+  ];
+
+  let randomNum = Math.floor(Math.random() * backgroundArr.length);
+
   gameScreen = buildDom(`   
 <div id="game-body">
 <audio controls id="main-song">
@@ -93,7 +106,7 @@ function createGameScreen() {
 </p>
     </span>
   </div>
- <main class="game-container">
+ <main class="game-container" style="background-image: url(${backgroundArr[randomNum]});">
  <header>
 </header>
   <div class="canvas-container">
@@ -102,16 +115,18 @@ function createGameScreen() {
 </main>
 </div>
 `);
-
   document.body.appendChild(gameScreen);
   return gameScreen;
 }
+
 function removeGameScreen() {
   gameScreen.remove();
 }
 
 // game over screen
 function createGameOverScreen() {
+  const winner = game.winner;
+
   gameOverScreen = buildDom(`
     <main class="game-over" width="auto" height="800">
     <audio controls id="win">
@@ -119,24 +134,31 @@ function createGameOverScreen() {
     </audio>
   <div id="stats-container">
         <h1 id="title">Race is over</h1>
-        <span class="final-stats">Final positions:</br>
-        <p>1st:<span id="go-first"></span></br>
-        2nd:<span id="go-second"></span></br>
+        <span class="final-stats">And the winner is...</br>
+        </br>
+        <p><span id="go-first">${winner}</span></br>
+        </br>
+        <img class="minis" src="img/players/yellow-chocobo.gif">
+        <img class="minis" src="img/players/black-chocobo.gif"> 
+        <img class="minis" src="img/players/red-chocobo.gif"> 
+        <img class="minis" src="img/players/blue-chocobo.gif"> 
+        <!-- 2nd:<span id="go-second"></span></br>
         3rd:<span id="go-third"></span></br>
-        4th:<span id="go-fourth"></span></br>
+        4th:<span id="go-fourth"></span></br> -->
         </p>
         </span>
-          <div class="text">
-        <p>  Well done racers!!! </br>
+          <div class="text"></br>
+        <p>  Well done runners!!! </br>
            Don't forget to pet your chocobos </br>
-          and feed them  some treats </br> 
+          and feed them  some treats. </br> 
           Ready for the next one?</p>
           </div>
-      <button class="restart-button">Restart</button>
+      <button class="restart-button">Play again</button>
      
       </div>
   	</main>
   `);
+
   document.body.appendChild(gameOverScreen);
   const restartButton = gameOverScreen.querySelector("button");
   restartButton.addEventListener("click", startGame);

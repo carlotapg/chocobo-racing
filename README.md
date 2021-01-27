@@ -1,30 +1,30 @@
-# \# Project's name
+# Project's name
 
 Chocobo Racing
 
-## \## Description
+## Description
 
 Chocobo Racing is a multiplayer game and its object is to reach the finish line in the first place. The player must avoid colliding with other players.
 
-## \## MVP (DOM - CANVAS)
+## MVP (DOM - CANVAS)
 
 Player needs to move forwards pressing a chosen key repeatedly to follow its path to the finish line. If two paths meet, players need to reduce or increase their speed to avoid collision with other players. If collision, still to decide(both go back to the start line or get stunned for X seconds). The game is over when a player reaches the finish line.
 
-## \## Backlog
+## Backlog
 
 - Create single player mode
 - Username registration and scoreboard
 - Sounds and visual effects (when collides, looses or wins)
 
-## \## Data structure
+## Data structure
 
 1. **index.html\*\***
 2. **style.css\*\***
 3. **main.js\*\***
 4. **game.js\*\***
-5. **chocobo.js\*\***
+5. **player.js\*\***
 
-#### **1. index.html file**
+#### 1. index.html file
 
 #### 2. style.css file
 
@@ -43,11 +43,13 @@ Player needs to move forwards pressing a chosen key repeatedly to follow its pat
 
 - ctx
 - canvas
-- player
-- youLose
-- youWin
-- racePosition
-- score
+- playersArr
+- gameOver
+- player1
+- player2
+- player3
+- player4
+- gameScreen
 
 **Methods:**
 
@@ -55,8 +57,8 @@ Player needs to move forwards pressing a chosen key repeatedly to follow its pat
 - startLoop
 - checkCollisions
 - updateGameStats
-- youLose
-- youWin
+- gameisOver
+- playSong
 
 #### 4. player.js file
 
@@ -66,19 +68,21 @@ Player needs to move forwards pressing a chosen key repeatedly to follow its pat
 - canvas
 - x
 - y
-- image
-- height
-- width
+- size
+- imagSrc
+- gifSrc
+- key
 - path
-- speed
+- boolean
+- name
 
 **Methods:**
 
-- draw
-- goForward
+- drawSprite
+- updatePosition
+- handleScreenCollision
 - didCollide
 - stunPlayer
-- setRandomPath
 
 ## \## States y States Transitions
 
@@ -88,31 +92,19 @@ Definition of the different states and their transition (transition functions)
 
 - Sets number of players
 
-- Sets number of circuits
-
 - Goes to gameScreen when start button is clicked
 
 ###### 4. gameScreen
 
-- countdown before running
+- displays players position in the race
 
-- race finishes when 1st player reaches the finish line
+- goes to Game Over screen when 1st player reaches the finish line
 
-- displays "next circuit" and updates page with new paths if there are more stages to be played.
+###### 3. gameOverScreen
 
-- goes to youWin/youLose if it's the last circuit
+- shows end of race message and play again button
 
-###### 3. youLose
-
-- shows final scores, you lose message and play again button
-
-- goes back to SplashScreen when play again button is clicked
-
-###### 4. youWin
-
-- shows final scores, you win message and play again button
-
-- goes back to SplashScreen when play again button is clicked
+- goes back to gameScreen when play again button is clicked
 
 ## \## Task
 
@@ -145,10 +137,10 @@ URls for the project repo and deploy
 
 [Link Repo](https://github.com/carlotapg/chocobo-project)
 
-[Link Deploy]()
+[Link Deploy](https://carlotapg.github.io/chocobo-racing/)
 
 ### \### Slides
 
 URls for the project presentation (slides)
 
-[Link Slides.com](http://slides.com)
+[Link Slides.com](https://docs.google.com/presentation/d/1DVqHCAz5m_sXfCWX91AV72-g4ss9TylqMYXN9XACK38/edit?usp=sharing)

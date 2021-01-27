@@ -107,8 +107,7 @@ ul {
 }
 
 .game-container {
-  background-image: url("../img/background/4.jpeg");
-
+  /* background-image: url("../img/background/4.jpeg"); */
   background-size: cover;
   background-repeat: no-repeat;
   width: 100vh;
@@ -121,9 +120,14 @@ ul {
   margin: auto;
 }
 
+#countdown {
+  display: absolute;
+  font-size: 200px;
+  color: black;
+}
 /* GAME OVER SCREEN */
 .game-over {
-  background-image: url("../img/game-over.jpg");
+  background-image: url("../img/source.gif"), url("../img/game-over.jpg");
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -172,4 +176,8 @@ ul {
 }
 #win {
   display: none;
+}
+#go-first {
+  padding-top: 300px;
+  font-size: 20px;
 }
