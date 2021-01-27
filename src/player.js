@@ -6,10 +6,9 @@ class Player {
     ctx,
     x,
     y,
-    newX,
-    newY,
     size,
     imgSrc,
+    gifSrc,
     key,
     path,
     boolean,
@@ -19,10 +18,9 @@ class Player {
     this.ctx = this.canvas.getContext("2d");
     this.x = this.canvas.width / 2;
     this.y = 0;
-    this.newX = undefined;
-    this.newY = undefined;
     this.size = 75;
     this.imgSrc = "img/players/yellow1.png";
+    this.gifSrc = "img/players/yellow-chocobo.gif";
     this.key = "v";
     this.path = undefined; // randomized with Math.floor
     this.boolean = false; // depends on clicks
@@ -94,7 +92,7 @@ class Player {
   }
 
   updatePosition() {
-    this.y += 200;
+    this.y += 5;
     // update player's vertical position
     let randomX = Number((Math.random() * this.canvas.width) / 10);
     this.x += Number(randomX - (Math.random() * this.canvas.width) / 10);
@@ -160,22 +158,48 @@ class Player {
 }
 
 class BlackPlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean, name) {
+  constructor(
+    canvas,
+    ctx,
+    x,
+    y,
+    size,
+    imgSrc,
+    gifSrc,
+    key,
+    path,
+    boolean,
+    name
+  ) {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 - 125;
     this.y = 0;
     this.imgSrc = "img/players/black1.png";
+    this.gifSrc = "img/players/black-chocobo.gif";
     this.key = "a";
     this.path = undefined;
     this.name = "Player 2";
   }
 }
 class RedPlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean, name) {
+  constructor(
+    canvas,
+    ctx,
+    x,
+    y,
+    size,
+    imgSrc,
+    gifSrc,
+    key,
+    path,
+    boolean,
+    name
+  ) {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 - 250;
     this.y = 0;
     this.imgSrc = "img/players/red1.png";
+    this.gifSrc = "img/players/red-chocobo.gif";
     this.key = "p";
     this.path = undefined;
     this.name = "Player 3";
@@ -183,11 +207,24 @@ class RedPlayer extends Player {
 }
 
 class BluePlayer extends Player {
-  constructor(canvas, ctx, x, y, size, imgSrc, key, path, boolean, name) {
+  constructor(
+    canvas,
+    ctx,
+    x,
+    y,
+    size,
+    imgSrc,
+    gifSrc,
+    key,
+    path,
+    boolean,
+    name
+  ) {
     super(canvas, ctx, size, boolean);
     this.x = this.canvas.width / 2 + 125;
     this.y = 0;
     this.imgSrc = "img/players/blue1.png";
+    this.gifSrc = "img/players/blue-chocobo.gif";
     this.key = "m";
     this.path = undefined;
     this.name = "Player 4";

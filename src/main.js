@@ -82,8 +82,10 @@ function createGameScreen() {
 <audio controls id="main-song">
   <source src="audio/song.mp3" type="audio/mpeg" autoplay>
 </audio>
+<div id="countdown">
+</div>
 <div class="position">
-<span class="label">Positions</br>
+<span class="label">Positions:</br>
 <p>1st:<span class="first"></span></br>
 2nd:<span class="second"></span></br>
 3rd:<span class="third"></span></br>
@@ -95,7 +97,7 @@ function createGameScreen() {
  <header>
 </header>
   <div class="canvas-container">
-    <canvas id="canvas" width="679" height="690"></canvas>
+    <canvas id="canvas" width="679" height="730"></canvas>
   </div>
 </main>
 </div>
@@ -113,22 +115,25 @@ function createGameOverScreen() {
   gameOverScreen = buildDom(`
     <main class="game-over" width="auto" height="800">
     <audio controls id="win">
-  <source src="audio/win.mp3" type="audio/mpeg" autoplay>
-  </audio>
-  <div id="stats-container"
-        <h1>Race is over</h1>
-        <p>Final positions:</br>
-        1st:<span class="go-first"></span></br>
-        2nd:<span class="go-second"></span></br>
-        3rd:<span class="go-third"></span></br>
-        4th:<span class="go-fourth"></span></br>
+    <source src="audio/win.mp3" type="audio/mpeg" autoplay>
+    </audio>
+  <div id="stats-container">
+        <h1 id="title">Race is over</h1>
+        <span class="final-stats">Final positions:</br>
+        <p>1st:<span id="go-first"></span></br>
+        2nd:<span id="go-second"></span></br>
+        3rd:<span id="go-third"></span></br>
+        4th:<span id="go-fourth"></span></br>
         </p>
-          
-          Well done racers!!! </br>
+        </span>
+          <div class="text">
+        <p>  Well done racers!!! </br>
            Don't forget to pet your chocobos </br>
           and feed them  some treats </br> 
           Ready for the next one?</p>
+          </div>
       <button class="restart-button">Restart</button>
+     
       </div>
   	</main>
   `);
