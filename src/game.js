@@ -154,6 +154,7 @@ class Game {
         this.player4.boolean = false;
       }
     });
+    this.playersArr.forEach((element) => element.drawSprite());
 
     this.playSong();
     // this.displayCountdown();
