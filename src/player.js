@@ -119,10 +119,10 @@ class Player {
 
     if (playerLeft <= screenLeft) {
       this.x += 10;
-      // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     } else if (playerRight >= screenRight - 50) {
       this.x -= 10;
-      // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
   }
 
