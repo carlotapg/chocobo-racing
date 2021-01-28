@@ -55,10 +55,6 @@ function createSplashScreen() {
   let numberOfCircuits = splashScreen.querySelector("#dropdown-circuits");
   const startButton = splashScreen.querySelector("#start-button");
 
-  //DELETE WHEN GAME SCREEN DONE
-  // startButton.addEventListener("click", startGame);
-
-  // UNCOMMENT WHEN GAME SCREEN DONE
   //makes number of players/circuits mandatory before launching game screen
 
   startButton.addEventListener("click", function () {
@@ -77,7 +73,7 @@ function removeSplashScreen() {
 
 // game screen
 function createGameScreen() {
-  // generates random background wevery time the page is reloaded
+  // generates random background every time the page is reloaded
   const backgroundArr = [
     "img/background/0.jpeg",
     "img/background/1.jpeg",

@@ -38,8 +38,8 @@ class Game {
       this.ctx,
       this.canvas.width / 2,
       0,
-      50,
-      "img/players/yellow1.png",
+      75,
+      "img/players/yellow.png",
       "img/players/yellow-chocobo.gif",
       "v",
       undefined,
@@ -51,8 +51,8 @@ class Game {
       this.ctx,
       this.canvas.width / 2 - 250,
       0,
-      50,
-      "img/players/black1.png",
+      75,
+      "img/players/black.png",
       "img/players/black-chocobo.gif",
       "a",
       undefined,
@@ -65,8 +65,8 @@ class Game {
       this.ctx,
       this.canvas.width / 2 - 250,
       0,
-      50,
-      "img/players/red1.png",
+      75,
+      "img/players/red.png",
       "img/players/red-chocobo.gif",
       "p",
       undefined,
@@ -79,8 +79,8 @@ class Game {
       this.ctx,
       this.canvas.width / 2 + 125,
       0,
-      50,
-      "img/players/blue1.png",
+      75,
+      "img/players/blue.png",
       "img/players/red-chocobo.gif",
       "m",
       undefined,
@@ -156,7 +156,7 @@ class Game {
     });
 
     this.playSong();
-    this.displayCountdown();
+    // this.displayCountdown();
     //start the loop w/ requestAnimationFrame
     this.startLoop();
   }
@@ -175,7 +175,6 @@ class Game {
       // 1.2 update the players
 
       this.playersArr.forEach((element) => this.checkCollisions(element));
-
       //
       //check if game is over
       this.gameIsOver();
@@ -204,37 +203,6 @@ class Game {
     });
   }
 
-  displayCountdown() {
-    var interval;
-    var seconds = 3;
-    window.onload = function () {
-      countdown("countdown");
-    };
-
-    let countdown = (element) => {
-      interval = setInterval(() => {
-        var el = document.querySelector("#countdown");
-        if (seconds == 0) {
-          if (minutes == 0) {
-            el.innerHTML = "countdown's over!";
-            clearInterval(interval);
-            return;
-          } else {
-            seconds = 3;
-          }
-        }
-        if (minutes > 0) {
-          var minute_text = minutes + (minutes > 1 ? " minutes" : " minute");
-        } else {
-          var minute_text = "";
-        }
-        var second_text = seconds > 1 ? "seconds" : "second";
-        el.innerHTML =
-          minute_text + " " + seconds + " " + second_text + " remaining";
-        seconds--;
-      }, 1000);
-    };
-  }
   updateGameStats() {
     let yPosition = [this.player1, this.player2, this.player3, this.player4];
     // sorts the players array in descending order
